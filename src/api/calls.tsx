@@ -13,3 +13,10 @@ export const getCountry = (name: string) => {
 	});
 	return data;
 };
+
+export const getCountryByCode = (code: string | undefined) => {
+	const data = axios.get(`https://restcountries.com/v3.1/alpha/${code}`).then((response) => {
+		return response.data;
+	});
+	return data;
+};

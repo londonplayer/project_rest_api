@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
-
 import styles from "./home.module.scss";
-
-// components
-
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-
-// api calls
-
 import { getBored } from "../../api/calls";
 import { getCountry } from "../../api/calls";
+import { useNavigate } from "react-router-dom";
+
+interface CountryType {
+	name: {
+		common: string;
+	};
+	cca2: string;
+}
 
 export default function Home() {
 	const [boredData, setBoredData] = useState({});
-	const [countryData, setCountryData] = useState({});
+	const [countryData, setCountryData] = useState<null | CountryType[]>(null);
 	const [countryName, setCountryName] = useState<string>("");
+
+	const hitory = useNavigate();
 
 	useEffect(() => {
 		getBored().then((result) => {
@@ -56,7 +59,23 @@ export default function Home() {
 		<>
 			<NavBar />
 			<div className={styles.container}>
-				<input type="text" onChange={(e) => delayedFuncion(e.target.value)} />
+				<div className={styles.header}>
+					<span>Select a country</span>
+					<input type="text" onChange={(e) => delayedFuncion(e.target.value)} />
+				</div>
+				<div className={styles.dropdown}>
+					{countryData?.map((item) => {
+						return (
+							<div
+								key={item.name.common}
+								className={styles.country}
+								onClick={() => hitory(`/country/${item.cca2}`)}
+							>
+								{countryName === "" ? "" : item.name.common}
+							</div>
+						);
+					})}
+				</div>
 			</div>
 			<Footer />
 		</>

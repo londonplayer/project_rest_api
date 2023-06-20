@@ -1,4 +1,38 @@
 .container {
 	display: flex;
 	justify-content: center;
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+
+		span {
+			text-align: center;
+		}
+	}
+
+	.dropdown {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 54%;
+		left: 44%;
+		height: 200px;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		.country {
+			display: flex;
+			cursor: pointer;
+			text-decoration: none;
+
+			&:hover {
+				background-color: gray;
+			}
+		}
+	}
 }

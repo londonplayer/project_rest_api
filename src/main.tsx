@@ -8,15 +8,20 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // components
 import App from "./App.tsx";
 import Extra from "./pages/Extra/Extra.tsx";
+import Country from "./pages/Country/Country.tsx";
 
 const router = createBrowserRouter([
 	{
-		path: "/home",
+		path: "/",
 		element: <App />,
 	},
 	{
 		path: "/extra",
 		element: <Extra />,
+	},
+	{
+		path: "/country/:id",
+		element: <Country />,
 	},
 ]);
 
